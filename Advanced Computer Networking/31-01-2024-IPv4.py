@@ -28,7 +28,7 @@ else:
 if(arrAddress[0] == 0):
     print("INVALID ")
     
-#Checking the all address to be Valid in the range(0,255)    
+# Checking the all address to be Valid in the range(0,255)    
 for x in arrAddress:  
     if (0 > x or 255 < x):
         print("INVALID RANGE ")
