@@ -41,11 +41,13 @@ void readNumbersFromFile(const string& fileName, int arr[], int size) {
 // funciton of an bubble sort implementation
 void bubbleSort(int arr[], int size) {
     for (int i = 0; i < size - 1; ++i) {
+        int flag = false;
         for (int j = 0; j < size - i - 1; ++j) {
             if (arr[j] > arr[j + 1]) {
-                swap(arr[j], arr[j + 1]);
+                swap(arr[j], arr[j + 1]); flag = true;
             }
         }
+        if(!flag) break;
     }
 }
 // funciton of an seleciton sort implementation
