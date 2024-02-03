@@ -2,7 +2,6 @@
 import sys
 import timeit
 
-
 # Ipv4 inputing string
 ipAddress = input("Enter IPv4 Address :")
 
@@ -16,7 +15,6 @@ except Exception as e:
     print(e)
     print("Inputed Address in not an integer string")
     sys.exit(1)     #system should exit the program i.e.,(exit == 1(error))
-
 
 if((len(arrAddress) != 4) or (arrAddress[0] == 0)): 
     # for checking the Address should be 4 cell and No leading of Zero's
