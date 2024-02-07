@@ -48,7 +48,7 @@ while(True):
                     print("INVALID RANGE ")
                     sys.exit(1)
             else:
-                print("Valid IPv4 Address Found")
+                print("Valid Range of IPv4 Address Found")
             
         case 4:
             #for finding the Class of IPv4 Address
