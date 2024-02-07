@@ -7,6 +7,7 @@
 using namespace std;
 using namespace std::chrono;
 
+
 // function to generate randome number and save it in file
 void generateAndSaveRandomNumbers(const string &fileName, int size)
 {
@@ -79,23 +80,57 @@ void selectionSort(int arr[], int size)
     }
 }
 
+void generateinputFile(const string& fileName,int size)
+{
+    ofstream file(fileName); // file open for writing
+    if (!file.is_open())
+    { // Open file error detection
+        cerr << "Error opening file for writing: " << fileName << endl;
+        exit(EXIT_FAILURE); // exit with failure status
+    }
+
+    srand(static_cast<unsigned>(time(0))); // seed assigned
+    for (int i = 0; i < size; ++i)
+    {                                 // store to the file
+        file << rand() % 1000 << " "; // random(0 to 999) generated
+    }
+
+    file.close(); // closing the file
+}
+
 int main()
 {
     const string inputFileName = "random_numbers.txt";
     const string bubbleSortFileName = "bubble_sort_result.csv";
     const string selectionSortFileName = "selection_sort_result.csv";
-    const int maxArraySize = 1000; // Set the maximum array size for testing
-    const int stepSize = 50;       // Set the step size for increasing array size
+    const string resultFileName = "result_file.csv";
+    const string inputFileN = "inputfile.txt";
 
+    generateinputFile(inputFileN,8);
     // opening respective files
     ofstream bubbleSortFile(bubbleSortFileName);
     ofstream selectionSortFile(selectionSortFileName);
+    ofstream resultFile(resultFileName);
+
+    ifstream inputFile(inputFileN);
+    if(!inputFile.is_open())
+    { // Open file error detection
+        cerr << "Error opening file for reading: " << inputFileN << endl;
+        exit(EXIT_FAILURE); // exit with failure status
+    }
+    int inputArray[8];
+    for (int i = 0; i < 8; ++i)
+    {
+        inputFile >> inputArray[i]; // inserting data to the array form file
+    }
+    inputFile.close();
 
     bubbleSortFile << "Array Size,Time (Bubble Sort), Sorted Array" << endl;
     selectionSortFile << "Array Size,Time (Selection Sort), Sorted Array" << endl;
+    resultFile << "Array Size,Bubble Sort Time,Selection Sort Time" << endl;
 
     // Impliment stepwise manner array of number increase
-    for (int arraySize = stepSize; arraySize <= maxArraySize; arraySize += stepSize)
+    for (auto arraySize : inputArray)
     {
         // Generate and save random numbers
         generateAndSaveRandomNumbers(inputFileName, arraySize);
@@ -130,14 +165,18 @@ int main()
             selectionSortFile << numbers[i] << " ";
         }
         selectionSortFile << endl;
+
+        //
+        resultFile << arraySize << "," << durationBubble.count() << "," << durationSelection.count() << endl;
     }
 
     // closing the files where opened
     bubbleSortFile.close();
     selectionSortFile.close();
+    resultFile.close();
 
     // successfull message to terminal
-    cout << "Sorting and data collection completed. Results saved in CSV files." << endl;
+    std::cout << "Sorting and data collection completed. Results saved in CSV files." << endl;
 
     return 0;
 }
