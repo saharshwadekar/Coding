@@ -13,9 +13,5 @@ passw = ""
 while (passSize):
     passSize-=1
     passw+=characters[random.randint(0,len(characters))]
-    
+
 print(passw)
-    
-
-
-    
