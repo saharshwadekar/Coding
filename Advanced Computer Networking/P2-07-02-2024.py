@@ -1,6 +1,4 @@
-
 import sys
-
 
 def intergerToBinary(arrAddress):
     binAddress = []
@@ -35,7 +33,6 @@ def checkClassNetHostId(binAddress):
         return "D", binAddress , "", maskingValue("D")
     else:
         return "E", binAddress , "", maskingValue("E")
-
 
 if __name__ == '__main__':
     # Ipv4 inputing string
