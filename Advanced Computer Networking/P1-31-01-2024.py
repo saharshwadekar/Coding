@@ -4,7 +4,6 @@ import timeit
 # Ipv4 inputing string
 ipAddress = input("Enter IPv4 Address :")
 
-startTime = timeit.default_timer()
 # spliting into 4 cells by formating with `.`
 arrAddress = ipAddress.split('.')
 
