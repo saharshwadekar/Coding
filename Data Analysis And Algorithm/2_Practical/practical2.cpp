@@ -2,7 +2,6 @@
 #include <fstream>
 #include <chrono>
 #include <vector>
-#pragma warning(disable : 4244)
 
 using namespace std;
 using namespace std::chrono;
@@ -120,8 +119,8 @@ int main()
     ofstream insertionSortFile(insertionSortFileName);
     ofstream mergeSortFile(mergeSortFileName);
 
-    insertionSortFile << "Array Size,Time (Insertion Sort), Sorted Array" << endl;
-    mergeSortFile << "Array Size,Time (Merge Sort), Sorted Array" << endl;
+    insertionSortFile << "Array Size,Time (Insertion Sort)" << endl;
+    mergeSortFile << "Array Size,Time (Merge Sort)" << endl;
     cout << "Array Size"
          << "\t"
          << "Insertion Time"

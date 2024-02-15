@@ -5,7 +5,7 @@ def microToSeconds(microsecond):
     return microsecond / 1000000
 
 # Read the CSV file
-insertion_file_path = 'insertionSort.csv' 
+insertion_file_path = 'insertionSort.csv'
 merge_file_path = 'mergeSort.csv'
 
 bdata = pd.read_csv(insertion_file_path)

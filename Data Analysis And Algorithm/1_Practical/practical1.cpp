@@ -73,25 +73,17 @@ void selectionSort(int arr[], int size)
 
 int main()
 {   // defining files names
-    // const string inputFile = "inputfile.txt";
     const string bubbleSortFileName = "bubbleSort.csv";
     const string selectionSortFileName = "selectionSort.csv";
     const string randomArrayFileName = "randomArrayFile.txt";
-    // // generate size
-    // // const int randomSize = (rand() % 10) + 1;
-    // // int sizeArray[randomSize];
-
-    // // generateRandomArray(inputFile, randomSize);
-    // // readFile(inputFile, sizeArray, randomSize);
 
     ofstream bubbleSortFile(bubbleSortFileName);
     ofstream selectionSortFile(selectionSortFileName);
 
-    bubbleSortFile << "Array Size,Time (Bubble Sort), Sorted Array" << endl;
-    selectionSortFile << "Array Size,Time (Selection Sort), Sorted Array" << endl;
+    bubbleSortFile << "Array Size,Time (Bubble Sort)" << endl;
+    selectionSortFile << "Array Size,Time (Selection Sort)" << endl;
     cout << "Array Size" << "\t" << "Bubble Time" << "\t" 
          << "Selection Time" << "\t" << endl;
-    // // for (auto arraySize : sizeArray)
     for(int arraySize = 500 ; arraySize <= 3000 ; arraySize += 500)
     {
         int numArray[arraySize];
@@ -104,32 +96,20 @@ int main()
         bubbleSort(numArray, arraySize);
         auto stopBubble = high_resolution_clock::now();
         auto durationBubble = duration_cast<microseconds>(stopBubble - startBubble);
-        bubbleSortFile << arraySize << "," << durationBubble.count() << ",";
-        for (int i = 0; i < arraySize; ++i)
-        { // storing into file
-            bubbleSortFile << numArray[i] << " ";
-        }
-        bubbleSortFile << endl;
+        bubbleSortFile << arraySize << "," << durationBubble.count() << endl;
 
         // Selection Sort and measure time
         auto startSelection = high_resolution_clock::now();
         selectionSort(numArray, arraySize);
         auto stopSelection = high_resolution_clock::now();
         auto durationSelection = duration_cast<microseconds>(stopSelection - startSelection);
-        selectionSortFile << arraySize << "," << durationSelection.count() << ",";
-        for (int i = 0; i < arraySize; ++i)
-        {
-            selectionSortFile << numArray[i] << " ";
-        }
-        selectionSortFile << endl;
+        selectionSortFile << arraySize << "," << durationSelection.count() << endl;
 
         cout << arraySize << "\t\t" << durationBubble.count() << "\t\t" 
              << durationSelection.count() << endl;
     }
-
     // closing the files where opened
     bubbleSortFile.close();
     selectionSortFile.close();
-
     return 0;
 }

@@ -1,11 +1,7 @@
 import sys
-import timeit
 
 # Ipv4 inputing string
 ipAddress = input("Enter IPv4 Address :")
-
-# spliting into 4 cells by formating with `.`
-arrAddress = ipAddress.split('.')
 
 print('''
       1. Check Interger or Not
@@ -52,15 +48,23 @@ while(True):
             firstCell = arrAddress[0]
             flag = "A"
             if(ipAddress == "127.0.0.1"):
-                flag = "A {LoopBack Address}"
+                flag += " {LoopBack Address}"
+            if(ipAddress == "10.0.0.1"):
+                flag += " {Private Address}"
             if(firstCell > 127):
                 flag = "B"
+                if(firstCell == 172 and (16 <= arrAddress[1] <= 31)):
+                    flag += " {Private Address}"
                 if(firstCell > 191):
                     flag = "C"
+                    if(firstCell == 192 and arrAddress[1]==168):
+                        flag += " {Private Address}"
+                    if(firstCell == 169 and arrAddress[1]==254):
+                        flag += " {Link Local Address}"
                     if(firstCell > 223):
-                        flag = "D {Multicast address}"
+                        flag = "D {Multicast Address}"
                         if(firstCell > 239):
-                            flag = "E"
+                            flag = "E {Reseach Purpose}"
 
             print("IPv4 " + ipAddress + " Belongs To Class " + flag)
 

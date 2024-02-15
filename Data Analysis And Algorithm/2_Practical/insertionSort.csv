@@ -1,7 +1,7 @@
-Array Size,Time (Insertion Sort), Sorted Array
-500,457
-1000,1740
-1500,5840
-2000,9307
-2500,13421
-3000,19774
+Array Size,Time (Insertion Sort)
+500,451
+1000,2500
+1500,4509
+2000,11068
+2500,25259
+3000,44574
