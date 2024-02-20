@@ -5,23 +5,19 @@
 import sys
 
 def calculateMaskValue(cusMask):
-    i = 0
     octet = 0;
-    if (cusMask > 32):
+    if (cusMask > 32 or cusMask < 0):
         return "Invalid Custome Mask Given!"
     if (cusMask >= 24):
-        i = (cusMask - 24)
-        for x in range(i):
+        for x in range((cusMask - 24)):
             octet += pow(2,7-x)
         return f"255.255.255.{octet}"
     elif (cusMask >= 16):
-        i = (cusMask - 16)
-        for x in range(i):
+        for x in range((cusMask - 16)):
             octet += pow(2,7-x)
         return f"255.255.{octet}.0"
     elif (cusMask >= 8):
-        i = (cusMask - 8)
-        for x in range(i):
+        for x in range((cusMask - 8)):
             octet += pow(2,7-x)
         return f"255.{octet}.0.0"
 
@@ -44,11 +40,11 @@ def findFLTIpAddress(ipAddress,ipClass):
     ipAddress = list(map(str,ipAddress))
     match ipClass:
         case 'A':
-            return ipAddress[0] + ".0.0.0" , ipAddress[0] + ".255.255.255" , 255*255*255
+            return ipAddress[0] + ".0.0.0" , ipAddress[0] + ".255.255.255" , (pow(2,24) - 2)
         case 'B':
-            return '.'.join(ipAddress[:2]) + ".0.0", '.'.join(ipAddress[:2]) + ".255.255", 255*255
+            return '.'.join(ipAddress[:2]) + ".0.0", '.'.join(ipAddress[:2]) + ".255.255", (pow(2,16) - 2)
         case 'C':
-            return '.'.join(ipAddress[:3]) + ".0",  '.'.join(ipAddress[:3]) + ".255", 255
+            return '.'.join(ipAddress[:3]) + ".0",  '.'.join(ipAddress[:3]) + ".255", (pow(2,8) - 2)
     return "", "", 0
 
 def identifyClass(binAddress):
@@ -82,8 +78,8 @@ if __name__ == '__main__':
 
     try:
         ipclist = list(map(str,ipAddress.split('/')))
-        ipAddress = ipclist[0];
-        cusMask = int(ipclist[1]);
+        ipAddress = ipclist[0]
+        cusMask = int(ipclist[1])
         ipAddress = list(map(int,ipAddress.split(".")))
         if choice == 2:
             ipAddress = list(map(binToint,ipAddress))

@@ -1,5 +1,5 @@
 Give an ipv4 address stream implement a program to check and print for the following 
 1. Identify the class of ipv4 in binary notation
 2. generate the network address, net id , and host id for classfull ipv4 address using default masking value.
-3. generate the first address, last address and total no. of address for class less ipv4 addressing scheme
+3. generate the first address, last address and total no. of address for classless ipv4 addressing scheme
 4. Calculation of cutome masking value for classless ipv4 addresses (formulae for custome making value)

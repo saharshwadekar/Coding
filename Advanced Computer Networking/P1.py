@@ -1,3 +1,4 @@
+# 31-01-2024
 import sys
 
 def checkIpValidity(ipAddress):
@@ -7,14 +8,13 @@ def checkIpValidity(ipAddress):
         return arrAddress
     except Exception as e:
         # Exception occur when one of the ipAddress is not in integer
-        print(e)
-        print("Inputed Address in not an integer string")
+        print("Inputed Address in not an integer  <--- Failed")
         sys.exit(1)     #system should exit the program i.e.,(exit == 1(error))
 
 def checkIpLength(arrAddress):
     if((len(arrAddress) != 4)):
         # for checking the Address should be 4 cell and No leading of Zero's
-        print("INVALID ADDRESS - Not of Length 4")
+        print("INVALID ADDRESS - Not of Length 4  <--- Failed")
         sys.exit(1)
     else:
         print("ADDRESS SCHEME IS VALID OF 4 OCTETS")
@@ -22,7 +22,7 @@ def checkIpLength(arrAddress):
 def checkIpLeadingZeros(arrAddress):
     if((arrAddress[0] == 0)):
         # for checking the Address should be 4 cell and No leading of Zero's
-        print("INVALID ADDRESS - Leading Zeros")
+        print("INVALID ADDRESS - Leading Zeros   <--- Failed")
         sys.exit(1)
     else:
         print("NO LEADING ZERO'S FOUND IN ADDRESS SCHEME")
@@ -60,21 +60,14 @@ def checkIpClass(arrAddress):
                     flag = "E {Reseach Purpose}"
         print("IPv4 " + ipAddress + " Belongs To Class " + flag)
 
-
-if __name__ == "__main__":
-    # Ipv4 inputing string
-    ipAddress = input("Enter IPv4 Address :")
-
-    print('''
-        1. Check Interger or Not
-        2. Check Octets and Leading Zero's
-        3. Valid Range
-        4. Classify Class
-        5. exit the program
-        ''')
-
+def checkInProcess(ipAddress):
     arrAddress = checkIpValidity(ipAddress)
     checkIpLength(arrAddress)
     checkIpLeadingZeros(arrAddress)
     checkIpValidRange(arrAddress)
-    checkIpClass(arrAddress)
+
+
+if __name__ == "__main__":
+    # Ipv4 inputing string
+    ipAddress = input("Enter IPv4 Address :")
+    checkInProcess(ipAddress)
