@@ -1,22 +1,56 @@
-import requests
+import openmeteo_requests
 
-api_key = open('api_key.txt', 'r').read()
+import requests_cache
+import pandas as pd
+from retry_requests import retry
 
-while True:
-    location = input("Location: ")
+# Setup the Open-Meteo API client with cache and retry on error
+cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
+retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
+openmeteo = openmeteo_requests.Client(session = retry_session)
 
-    result = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={location}&units=metric&appid={api_key}')
-    if result.json()['cod'] == '404':
-        print("Invalid location!")
-        continue
-    break
+# Make sure all required weather variables are listed here
+# The order of variables in hourly or daily is important to assign them correctly below
+# url = "https://api.open-meteo.com/v1/jma"
+url = "https://my-server.tld/v1/jma"
+params = {
+	"latitude": 52.52,
+	"longitude": 13.41,
+	"current": ["temperature_2m", "relative_humidity_2m", "is_day", "rain", "showers", "snowfall", "weather_code", "pressure_msl", "surface_pressure", "wind_speed_10m", "wind_direction_10m"],
+	"forecast_days": 1
+}
+responses = openmeteo.weather_api(url, params=params)
 
-description = result.json()['weather'][0]['description']
-temperature = round(result.json()['main']['temp'])
-feels_like = round(result.json()['main']['feels_like'])
-high = round(result.json()['main']['temp_max'])
-low = round(result.json()['main']['temp_min'])
+# Process first location. Add a for-loop for multiple locations or weather models
+response = responses[0]
+print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
+print(f"Elevation {response.Elevation()} m asl")
+print(f"Timezone {response.Timezone()} {response.TimezoneAbbreviation()}")
+print(f"Timezone difference to GMT+0 {response.UtcOffsetSeconds()} s")
 
-print(f"The weather in {location[0].upper()}{location[1:]} is {temperature}° C with {description}.")
-print(f"It feels like {feels_like}° C.")
-print(f"Today's high is {high}° C and today's low is {low}° C.")
+# Current values. The order of variables needs to be the same as requested.
+current = response.Current()
+current_temperature_2m = current.Variables(0).Value()
+current_relative_humidity_2m = current.Variables(1).Value()
+current_is_day = current.Variables(2).Value()
+current_rain = current.Variables(3).Value()
+current_showers = current.Variables(4).Value()
+current_snowfall = current.Variables(5).Value()
+current_weather_code = current.Variables(6).Value()
+current_pressure_msl = current.Variables(7).Value()
+current_surface_pressure = current.Variables(8).Value()
+current_wind_speed_10m = current.Variables(9).Value()
+current_wind_direction_10m = current.Variables(10).Value()
+
+print(f"Current time {current.Time()}")
+print(f"Current temperature_2m {current_temperature_2m}")
+print(f"Current relative_humidity_2m {current_relative_humidity_2m}")
+print(f"Current is_day {current_is_day}")
+print(f"Current rain {current_rain}")
+print(f"Current showers {current_showers}")
+print(f"Current snowfall {current_snowfall}")
+print(f"Current weather_code {current_weather_code}")
+print(f"Current pressure_msl {current_pressure_msl}")
+print(f"Current surface_pressure {current_surface_pressure}")
+print(f"Current wind_speed_10m {current_wind_speed_10m}")
+print(f"Current wind_direction_10m {current_wind_direction_10m}")

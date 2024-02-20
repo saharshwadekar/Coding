@@ -119,8 +119,8 @@ int main()
     ofstream insertionSortFile(insertionSortFileName);
     ofstream mergeSortFile(mergeSortFileName);
 
-    insertionSortFile << "Array Size,Time (Insertion Sort)" << endl;
-    mergeSortFile << "Array Size,Time (Merge Sort)" << endl;
+    insertionSortFile << "Array Size,Time (Insertion Sort),Sorted Array" << endl;
+    mergeSortFile << "Array Size,Time (Merge Sort),Sorted Array" << endl;
     cout << "Array Size"
          << "\t"
          << "Insertion Time"
@@ -140,14 +140,24 @@ int main()
         insertionSort(numArray, arraySize);
         auto stopInsertion = high_resolution_clock::now();
         auto durationInsertion = duration_cast<microseconds>(stopInsertion - startInsertion);
-        insertionSortFile << arraySize << "," << durationInsertion.count() << endl;
+        insertionSortFile << arraySize << "," << durationInsertion.count() << ",";
+        for (int i = 0; i < arraySize; ++i)
+        { // storing into file
+            insertionSortFile << numArray[i] << " ";
+        }
+        insertionSortFile << endl;
 
         // Merge Sort and measure time
         auto startMerge = high_resolution_clock::now();
         mergeSort(numArray, 0, arraySize - 1);
         auto stopMerge = high_resolution_clock::now();
         auto durationMerge = duration_cast<microseconds>(stopMerge - startMerge);
-        mergeSortFile << arraySize << "," << durationMerge.count() << endl;
+        mergeSortFile << arraySize << "," << durationMerge.count() << ",";
+        for (int i = 0; i < arraySize; ++i)
+        {
+            mergeSortFile << numArray[i] << " ";
+        }
+        mergeSortFile << endl;
 
         cout << arraySize << "\t\t" << durationInsertion.count() << "\t\t"
              << durationMerge.count() << endl;

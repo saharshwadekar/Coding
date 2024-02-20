@@ -35,7 +35,6 @@ def identifyNetAddNetHostId(ipAddress,ipClass):
             return '.'.join(ipAddress), '.'.join(ipAddress), '.'.join(ipAddress)
     return "", "", ""
 
-
 def findFLTIpAddress(ipAddress,ipClass):
     match ipClass:
         case 'A':
@@ -65,7 +64,6 @@ def calculateMaskValue(cusMask):
                 octet += pow(2,7-x)
             return f"255.{octet}.0.0"
 
-
 if __name__ == '__main__':
     # Ipv4 inputing string
     ipAddress = input("Enter IPv4 Address :")
@@ -78,7 +76,6 @@ if __name__ == '__main__':
         print(e)
         print("Inputed Address in not an integer string")
         sys.exit(1)     #system should exit the program i.e.,(exit == 1(error))
-
     print(
         '''
         1. Convert To Binary Notation
@@ -99,11 +96,9 @@ if __name__ == '__main__':
                 binAddress = intergerToBinary(arrAddress)
                 printBinAddress = ".".join(binAddress)
                 print(printBinAddress)
-
             case 2:
                 ipClass = identifyClass(binAddress)
                 print("Class of Given Ip Address is :" , ipClass)
-
             case 3:
                 netAdd, netId, hostId = identifyNetAddNetHostId(ipAddress,ipClass)
                 print(
@@ -112,7 +107,6 @@ if __name__ == '__main__':
                     Your Network Id : {netId}
                     Your Host Id : {hostId}
                     ''')
-
             case 4:
                 fIpAdd , lIpAdd , tIpAdd = findFLTIpAddress(ipAddress,ipClass)
                 print(
@@ -121,7 +115,6 @@ if __name__ == '__main__':
                     Last Ip Address : {lIpAdd}
                     Total Ip Address : {tIpAdd}
                     ''')
-
             case 5:
                 cusMask = int(input(f"Enter custome Subnet Mask : {'.'.join(ipAddress)}/"))
                 customeMask = calculateMaskValue(cusMask)
@@ -130,6 +123,5 @@ if __name__ == '__main__':
                     Custom Masking Value : {customeMask}
                     '''
                       )
-
             case 6:
                 sys.exit(0)
