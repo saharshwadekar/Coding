@@ -1,0 +1,5 @@
+implement ipv6 ip address  for a network having 2 to 3 computer and show the simulation using cisco packet tracer tool for a lan network
+how to add ipv6 address 
+switches and hub
+tow lan connections
+icmp

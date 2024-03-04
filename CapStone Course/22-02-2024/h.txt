@@ -1,0 +1,3 @@
+1. password strength checker
+2. desktop notifier app
+3. python file explorer
