@@ -13,12 +13,12 @@ server.listen()
 clients_info: dict[socket.socket, str] = {}
 
 
-def broadcast(message):
+def broadcast(message) -> None:
     for client in clients_info.keys():
         client.send(message)
 
 
-def handle(client):
+def handle(client) -> None:
     while True:
         try:
             message: bytes = client.recv(SIZE)
@@ -34,7 +34,7 @@ def handle(client):
             break
 
 
-def receive():
+def receive() -> None:
     while True:
         client, address = server.accept()
         print(f"Connected with {str(address)}")
