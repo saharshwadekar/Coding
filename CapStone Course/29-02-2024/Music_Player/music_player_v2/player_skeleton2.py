@@ -1,11 +1,3 @@
-#----------------------------------------------------------------------
-# player_skeleton2.py
-#
-# Created: 04/15/2010
-#
-# Author: Mike Driscoll - mike@pythonlibrary.org
-#----------------------------------------------------------------------
-
 import os
 import wx
 import wx.media
