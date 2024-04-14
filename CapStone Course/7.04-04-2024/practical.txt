@@ -1,0 +1,3 @@
+1 -> Get Stock price data and Candel-stick chart
+2 -> Visualize a neural network
+3 -> Bias and variance (SVM)
