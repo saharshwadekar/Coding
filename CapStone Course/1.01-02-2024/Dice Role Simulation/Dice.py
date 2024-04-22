@@ -12,7 +12,7 @@ HeadingLabel = tkinter.Label(root, text="Dice Rolling",
      font="Helvetica 16 bold italic")
 HeadingLabel.pack()
 
-dice_folder = "/Users/saharsh/Documents/Coding/CapStone Course/01-02-2024/Dice Role Simulation/"
+dice_folder = "D:/Coding/CapStone Course/1.01-02-2024/Dice Role Simulation/"
 dice_images = [os.path.join(dice_folder, f"{i}.png") for i in range(1, 7)]
 
 def roll_dice():

@@ -1,41 +1,24 @@
-# import requests
-# import json
-# respond = requests.get("https://newsapi.org/v2/everything?domains=wsj.com&apiKey=ae357682672146ca889a4f745f71bd1f")
-# print(respond.json());
+import tkinter as tk
+import pyttsx3
 
-# def jprint(obj):
-#     # create a formatted string of the Python JSON object
-#     text = json.dumps(obj, sort_keys=True, indent=4)
-#     print(text)
+def read_article():
+    article_text = article_textbox.get("1.0", tk.END)
+    engine = pyttsx3.init()
+    engine.setProperty('rate', 150)  # Adjust the reading speed as needed
+    engine.say(article_text)
+    engine.runAndWait()
 
-# jprint(respond.json())
+# Create GUI
+root = tk.Tk()
+root.title("Article Reader")
 
+article_label = tk.Label(root, text="Enter Article Text:")
+article_label.pack(pady=10)
 
-from newspaper import Article
+article_textbox = tk.Text(root, width=80, height=20)
+article_textbox.pack(pady=5)
 
-url = "http:// timesofindia.indiatimes.com/world/china/chinese-expert-warns-of-troops-entering-kashmir/articleshow/59516912.cms"
+read_button = tk.Button(root, text="Read Article", command=read_article)
+read_button.pack(pady=10)
 
-
-toi_article = Article(url, language="en") # en for English
-
-toi_article.parse()
-toi_article.nlp()
-
-
-print("Article's Title:")
-print(toi_article.title)
-print("n")
-
-#To extract text
-print("Article's Text:")
-print(toi_article.text)
-print("n")
-
-#To extract summary
-print("Article's Summary:")
-print(toi_article.summary)
-print("n")
-
-#To extract keywords
-print("Article's Keywords:")
-print(toi_article.keywords)
+root.mainloop()

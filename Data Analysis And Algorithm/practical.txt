@@ -1,7 +1,8 @@
 4. Implementation of job sequencing with deadline problem (greedy approach)
 5. Implemetation of a fractional knapsack problem using (greedy approach)
-6. Find minimum cost spanning tree of given undrirected graph using cruskals algorithm or prims algorithm 
-7. Implemetation zero one knasack problem using dynamic programming
-8. Implementation of matrics chain multiplicaiton using dynamic programming
-9. Implement longest common subsequence problem (dynamic programming)
-10. Implement graph traversal technique BFS or DFS
+6. Find minimum cost spanning tree of given undrirected graph using kruskals algorithm 
+7. Find minimum cost spanning tree of given undrirected graph using prims algorithm 
+8. Implemetation zero one knasack problem using dynamic programming
+9. Implementation of matrics chain multiplicaiton using dynamic programming
+10. Implement longest common subsequence problem (dynamic programming)
+11. Implement graph traversal technique BFS or DFS

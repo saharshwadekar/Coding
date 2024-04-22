@@ -20,12 +20,10 @@ public:
     {
         Edge edge = {src, dest, weight};
         edges.push_back(edge);
-        Edge reverseEdge = {dest, src, weight}; 
-        edges.push_back(reverseEdge);
     }
 
     int findParent(int parent[], int i)
-    {
+    { 
         if (parent[i] == i)
             return i;
         return findParent(parent, parent[i]);
@@ -79,49 +77,6 @@ public:
         for (Edge edge : result)
             cout << edge.src << " - " << edge.dest << " : " << edge.weight << endl;
     }
-
-    void primMST()
-    {
-        vector<int> key(V, INT32_MAX);
-        vector<bool> mstSet(V, false);
-        vector<int> parent(V, -1);
-
-        key[0] = 0; 
-
-        for (int count = 0; count < V - 1; count++)
-        {
-            int u = minKey(key, mstSet);
-            mstSet[u] = true;
-
-            // Update key values and parent for adjacent vertices of the picked vertex
-            for (const Edge &edge : edges)
-            {
-                if (!mstSet[edge.dest] && edge.src == u && edge.weight < key[edge.dest])
-                {
-                    parent[edge.dest] = u;
-                    key[edge.dest] = edge.weight;
-                }
-            }
-        }
-
-        cout << "\nPrim's MST:" << endl;
-        for (int i = 1; i < V; i++)
-            cout << parent[i] << " - " << i << " : " << key[i] << endl;
-    }
-
-    int minKey(vector<int> &key, vector<bool> &mstSet)
-    {
-        int minIndex, min = INT32_MAX;
-        for (int v = 0; v < V; v++)
-        {
-            if (!mstSet[v] && key[v] < min)
-            {
-                min = key[v];
-                minIndex = v;
-            }
-        }
-        return minIndex;
-    }
 };
 
 int main()
@@ -140,7 +95,25 @@ int main()
     }
 
     graph.kruskalMST();
-    graph.primMST();
 
     return 0;
 }
+
+/* 10 16
+0 1 4
+0 3 1
+1 3 4
+3 7 5
+7 9 2
+3 9 6
+1 9 10
+1 2 4
+9 6 4
+9 8 3
+4 6 2
+4 2 2
+6 8 3
+6 5 3
+2 5 1
+8 5 5
+*/
