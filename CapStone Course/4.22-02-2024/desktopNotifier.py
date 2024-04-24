@@ -3,7 +3,6 @@ import datetime
 import time
 from plyer import notification
 
-# List of random quotes
 quotes = [
     "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
     "The only way to do great work is to love what you do. - Steve Jobs",

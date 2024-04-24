@@ -8,7 +8,7 @@ root.geometry("600x600")
 root.title("Dice Roll Prediction")
 
 HeadingLabel = tkinter.Label(root, text="Dice Rolling",
-     bg="#211D35",
+     bg="#fff",
      font="Helvetica 16 bold italic")
 HeadingLabel.pack()
 
@@ -28,7 +28,7 @@ ImageLabel.pack(expand=True)
 
 roll_dice()
 
-button = tkinter.Button(root, text='Roll it', fg='blue', command=roll_dice)
+button = tkinter.Button(root, text='Roll it', fg='Green', command=roll_dice)
 button.pack(expand=True)
 
 root.mainloop()
