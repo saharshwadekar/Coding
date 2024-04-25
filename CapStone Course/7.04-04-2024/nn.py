@@ -1,24 +1,20 @@
 import tensorflow as tf
-from tensorflow.keras import layers
-import matplotlib.pyplot as plt
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dense
+from IPython.display import Image
 
-# Define a simple neural network model
-model = tf.keras.Sequential([
-    layers.Dense(128, activation='relu', input_shape=(784,)),
-    layers.Dense(64, activation='relu'),
-    layers.Dense(10, activation='softmax')
+# Create a simple neural network model
+model = Sequential([
+    Dense(128, activation='relu', input_shape=(784,), name='new_input_layer'),
+    Dense(64, activation='relu', name='hidden_layer'),
+    Dense(10, activation='softmax', name='output_layer')
 ])
 
 # Compile the model
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# Visualize the model architecture using Matplotlib
-tf.keras.utils.plot_model(model, to_file='model.png', show_shapes=True)
+# Visualize the model architecture
+tf.keras.utils.plot_model(model, to_file='neural_network.png', show_shapes=True, show_layer_names=True)
 
-# Display the model architecture plot
-img = plt.imread('model.png')
-plt.imshow(img)
-plt.axis('off')
-plt.show()
+# Display the image of the neural network architecture
+Image(filename='neural_network.png')

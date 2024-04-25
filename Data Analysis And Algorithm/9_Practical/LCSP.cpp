@@ -24,8 +24,8 @@ public:
     void longestCommonSubSeq()
     {
         vector<vector<Element>> Matrix(xlen + 1, vector<Element>(ylen + 1));
-        Element *max;
-        string result = "I'm here";
+        Element *max = &Matrix[0][0];
+        string result;
 
         for (int i = 1; i <= xlen; ++i)
         {
@@ -49,18 +49,13 @@ public:
                     Matrix[i][j].ele = Matrix[i - 1][j].ele;
                     Matrix[i][j].prev = &Matrix[i - 1][j];
                 }
-                // finding max element in table;
-                if ((*max).val < Matrix[i][j].val)
+                if (max->val < Matrix[i][j].val)
                 {
                     max = &Matrix[i][j];
                 }
             }
         }
 
-        // printing
-
-        // Matrix Printing
-        cout << endl;
         for (int i = 0; i <= xlen; ++i)
         {
             for (int j = 0; j <= ylen; ++j)
@@ -72,25 +67,44 @@ public:
         cout << endl
              << endl;
 
-        // string Calculaiton
-        
-        while ((*max).ele != "EX")
+        while (max->ele != "EX")
         {
-            Element *last = (*max).prev;
-            if ((*last).ele != (*max).ele)
+            if (result.empty() || result.back() != max->ele[0])
             {
-                result += ((*max).ele);
+                result += max->ele;
             }
-            max = (*max).prev;
+            max = max->prev;
         }
-        cout << result;
+
+        reverse(result.begin(), result.end());
+        int length = result.size();
+        cout << "Longest Common Subsequence: " << result << endl;
+        cout << "Length of LCS: " << length << endl;
     }
 };
 
 int main()
 {
-    int i;
     LCSP saharsh("EXPONENTIAL", "POLYNOMIAL");
     saharsh.longestCommonSubSeq();
-    cin >> i;
+    return 0;
 }
+
+//Output
+PS D:\Coding\Data Analysis And Algorithm> cd "d:\Coding\Data Analysis And Algorithm\9_Practical\" ; if ($?) { g++ LCSP.cpp -o LCSP } ; if ($?) { .\LCSP }
+EX      EX      EX      EX      EX      EX      EX      EX      EX      EX      EX
+EX      EX      EX      EX      EX      EX      EX      EX      EX      EX      EX
+EX      EX      EX      EX      EX      EX      EX      EX      EX      EX      EX
+EX      P       P       P       P       P       P       P       P       P       P
+EX      P       O       O       O       O       O       O       O       O       O
+EX      P       O       O       O       N       N       N       N       N       N
+EX      P       O       O       O       N       N       N       N       N       N
+EX      P       O       O       O       N       N       N       N       N       N
+EX      P       O       O       O       N       N       N       N       N       N
+EX      P       O       O       O       N       N       N       I       I       I
+EX      P       O       O       O       N       N       N       I       A       A
+EX      P       O       L       L       N       N       N       I       A       L
+
+
+Longest Common Subsequence: PONIAL
+Length of LCS: 6
