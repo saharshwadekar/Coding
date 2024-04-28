@@ -1,10 +1,11 @@
 import tensorflow as tf
-from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.layers import Dense
+from tensorflow import keras
+from tensforflow.
+from tensorflow.keras.layers import Dense
 from IPython.display import Image
 
 # Create a simple neural network model
-model = Sequential([
+model = keras.Sequential([
     Dense(128, activation='relu', input_shape=(784,), name='new_input_layer'),
     Dense(64, activation='relu', name='hidden_layer'),
     Dense(10, activation='softmax', name='output_layer')
