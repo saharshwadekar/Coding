@@ -79,7 +79,6 @@ int main()
     const char *inputFile = "inputfile.txt";
     const char *randomArrayFileName = "randomArrayFile.txt";
 
-    // Generate random array size (limited to 10)
     int randomSize = (rand() % 10) + 1;
     int *sizeArray = new int[randomSize];
 

@@ -22,7 +22,7 @@ public:
             return;
         }
         sumSubsetProblem(i + 1, value + setofint[i], ans + "1");
-        sumSubsetProblem(i + 1, value, ans + "0");
+        sumSubsetProblem(i + 1, value              , ans + "0");
     }
 
     void printresult()
