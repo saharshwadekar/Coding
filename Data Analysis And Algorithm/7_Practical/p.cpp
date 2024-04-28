@@ -6,9 +6,9 @@ using namespace std;
 void prims(int E, int V)
 {
     int A[V][V];
-    int MST[V];
-    int parent[V];
-    int key[V];
+    int *MST = new int[V];
+    int *parent = new int[V];
+    int *key = new int[V];
     int iter = V;
 
     for (int i = 0; i < V; i++)
@@ -34,14 +34,11 @@ void prims(int E, int V)
 
     while (iter)
     {
-        int minIndex, min = INT_MAX;
-        for (int v = 0; v < V; v++)
+        int minIndex = 0;
+        for (int i = 1; i < V; ++i)
         {
-            if (!MST[v] && key[v] < min)
-            {
-                min = key[v];
-                minIndex = v;
-            }
+            if (key[i] < key[minIndex] && !MST[i])
+                minIndex = i;
         }
 
         MST[minIndex] = 1;
