@@ -4,7 +4,7 @@ import random
 characters = ""
 characters += string.ascii_letters
 characters += string.digits
-# characters += string.punctuation
+characters += string.punctuation
 
 passSize = 16
 

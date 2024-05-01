@@ -23,16 +23,13 @@ class URLShortenerApp:
             messagebox.showerror("Error", "Please enter a URL.")
             return
 
-        # Generate a hash of the original URL
         hash_value = hashlib.md5(original_url.encode()).hexdigest()
-        short_url = f'http://short.url/{hash_value[:8]}'  # Using first 8 characters of the hash as the short URL
+        short_url = f'http://short.url/{hash_value[:8]}' 
 
-        # Copy the short URL to the clipboard
         pyperclip.copy(short_url)
 
         messagebox.showinfo("Shortened URL", f"Shortened URL: {short_url}\n\nCopied to clipboard.")
 
-# Create GUI
 root = tk.Tk()
 app = URLShortenerApp(root)
 root.mainloop()

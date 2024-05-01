@@ -10,17 +10,12 @@ quotes = [
     "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
     "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
     "The best way to predict the future is to create it. - Peter Drucker",
-    "You are never too old to set another goal or to dream a new dream. - C.S. Lewis",
-    "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt",
-    "The way to get started is to quit talking and begin doing. - Walt Disney",
-    "It's not whether you get knocked down, it's whether you get up. - Vince Lombardi"
 ]
 
 def show_notification():
     quote = random.choice(quotes)
 
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
-
     message = f"Quote of the day:\n\n{quote}\n\nDate: {current_date}"
 
     notification.notify(

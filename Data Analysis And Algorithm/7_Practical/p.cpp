@@ -34,11 +34,14 @@ void prims(int E, int V)
 
     while (iter)
     {
-        int minIndex = 0;
+        int minIndex, min = INT_MAX;
         for (int i = 1; i < V; ++i)
         {
-            if (key[i] < key[minIndex] && !MST[i])
+            if (key[i] < min && !MST[i])
+            {
                 minIndex = i;
+                min = key[i];
+            }
         }
 
         MST[minIndex] = 1;

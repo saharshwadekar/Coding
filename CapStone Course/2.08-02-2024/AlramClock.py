@@ -33,11 +33,11 @@ root.geometry("300x300")
 root.title("Time Clock")
 
 HeadingLabel = tk.Label(root, text="Set Alarm",
-     bg="#211D35",
+     bg="#fff",
      font="Helvetica 16 bold italic")
 HeadingLabel.pack()
 
-clock_label = tk.Label(root, text="",bg="#211D35", font=("Helvetica", 48))
+clock_label = tk.Label(root, text="",bg="#fff", font=("Helvetica", 48))
 clock_label.pack(padx=20, pady=20)
 update_time()
 

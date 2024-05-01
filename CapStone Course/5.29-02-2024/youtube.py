@@ -3,28 +3,19 @@ from tkinter import messagebox
 from pytube import YouTube, Playlist
 
 def download_video():
-    video_url = url_entry.get()
     try:
-        yt = YouTube(video_url)
-        stream = yt.streams.get_highest_resolution()
-        stream.download()
-        messagebox.showinfo("Download Complete", f"Video '{yt.title}' downloaded successfully!")
+        YouTube(url_entry.get()).streams.get_highest_resolution().download()
+        messagebox.showinfo("Download Complete", "Video downloaded successfully!")
     except Exception as e:
         messagebox.showerror("Error", f"Error downloading video: {str(e)}")
 
 def download_playlist():
-    playlist_url = url_entry.get()
     try:
-        playlist = Playlist(playlist_url)
-        for video in playlist.video_urls:
-            yt = YouTube(video)
-            stream = yt.streams.get_highest_resolution()
-            stream.download()
-        messagebox.showinfo("Download Complete", f"Playlist '{playlist.title}' downloaded successfully!")
+        Playlist(url_entry.get()).download_all()
+        messagebox.showinfo("Download Complete", "Playlist downloaded successfully!")
     except Exception as e:
         messagebox.showerror("Error", f"Error downloading playlist: {str(e)}")
 
-# Create GUI
 root = tk.Tk()
 root.title("YouTube Downloader")
 

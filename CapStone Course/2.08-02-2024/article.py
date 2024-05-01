@@ -4,11 +4,10 @@ import pyttsx3
 def read_article():
     article_text = article_textbox.get("1.0", tk.END)
     engine = pyttsx3.init()
-    engine.setProperty('rate', 150)  # Adjust the reading speed as needed
+    engine.setProperty('rate', 150)
     engine.say(article_text)
     engine.runAndWait()
 
-# Create GUI
 root = tk.Tk()
 root.title("Article Reader")
 

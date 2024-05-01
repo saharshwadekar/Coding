@@ -1,66 +1,68 @@
 import tkinter as tk
-import time
-from datetime import datetime as dt
+from tkinter import messagebox
+import ctypes
+import sys
 
-# Define the host file path and redirect IP
-hosts_path = r"D:/Coding/CapStone Course/6.28-03-2024/host_log_file.txt"  # Update this path for non-Windows systems
-redirect_ip = "127.0.0.1"
+hosts_path = r"C:\Windows\System32\drivers\etc\hosts"
 
-def block_websites():
-    website_list = website_entry.get().split(",")
-    with open(hosts_path, 'r+') as file:
-        content = file.read()
-        for website in website_list:
-            if website.strip() in content:
-                pass
-            else:
-                file.write(redirect_ip + " " + website.strip() + "\n")
-    status_label.config(text="Websites blocked!")
+def block_website():
+    website = website_entry.get()
+    if website:
+        try:
+            with open(hosts_path, "r+") as file:
+                hosts_content = file.read()
+                if website in hosts_content:
+                    messagebox.showinfo("Website Blocker", f"{website} is already blocked.")
+                else:
+                    file.write(f"\n127.0.0.1 {website}")
+                    messagebox.showinfo("Website Blocker", f"{website} blocked successfully.")
+        except PermissionError:
+            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+    else:
+        messagebox.showerror("Error", "Please enter a website to block.")
 
-def unblock_websites():
-    website_list = website_entry.get().split(",")
-    with open(hosts_path, 'r+') as file:
-        content = file.readlines()
-        file.seek(0)
-        for line in content:
-            if not any(website.strip() in line for website in website_list):
-                file.write(line)
-        file.truncate()
-    status_label.config(text="Websites unblocked!")
-
-def start_blocking():
-    start_time_dt = dt.now()
-    end_time = end_time_entry.get()
-    end_time_dt = dt.strptime(end_time, "%H:%M")
-
-    while True:
-        current_time = dt.now().time()
-        if start_time_dt.time() <= current_time < end_time_dt.time():
-            block_websites()
-        else:
-            unblock_websites()
-        time.sleep(10)  # Check every 10 seconds
+def unblock_website():
+    website = website_entry.get()
+    if website:
+        try:
+            with open(hosts_path, "r+") as file:
+                lines = file.readlines()
+                file.seek(0)
+                for line in lines:
+                    if not any(website in line for website in [website, f"www.{website}"]):
+                        file.write(line)
+                file.truncate()
+                messagebox.showinfo("Website Blocker", f"{website} unblocked successfully.")
+        except PermissionError:
+            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+    else:
+        messagebox.showerror("Error", "Please enter a website to unblock.")
 
 # Create GUI
-window = tk.Tk()
-window.title("Website Blocker")
+root = tk.Tk()
+root.title("Website Blocker")
+root.geometry("400x200")
 
-website_label = tk.Label(window, text="Enter websites to block (separated by commas):")
+# Styles
+title_style = ("Helvetica", 16, "bold")
+label_style = ("Helvetica", 12)
+entry_style = ("Helvetica", 12)
+button_style = ("Helvetica", 12, "bold")
+
+# Widgets
+title_label = tk.Label(root, text="Website Blocker", font=title_style)
+title_label.pack(pady=10)
+
+website_label = tk.Label(root, text="Website:", font=label_style)
 website_label.pack()
 
-website_entry = tk.Entry(window, width=50)
+website_entry = tk.Entry(root, font=entry_style)
 website_entry.pack()
 
-end_time_label = tk.Label(window, text="Enter end time (HH:MM):")
-end_time_label.pack()
+block_button = tk.Button(root, text="Block Website", command=block_website, font=button_style)
+block_button.pack(pady=10)
 
-end_time_entry = tk.Entry(window, width=10)
-end_time_entry.pack()
+unblock_button = tk.Button(root, text="Unblock Website", command=unblock_website, font=button_style)
+unblock_button.pack()
 
-status_label = tk.Label(window, text="")
-status_label.pack()
-
-start_button = tk.Button(window, text="Start Blocking", command=start_blocking)
-start_button.pack()
-
-window.mainloop()
+root.mainloop()
