@@ -1,7 +1,6 @@
 import pygame,random
 pygame.init()
 
-# Colors
 white,black,red,green,blue = (255,255,255),(0,0,0),(213,50,80),(0,255,0),(50,153,213)
 dis_width,dis_height,snake_block = 300,300,10
 dis = pygame.display.set_mode((dis_width, dis_height))

@@ -17,7 +17,6 @@ def choose_file():
     filename = filedialog.askopenfilename()
     status_label.config(text="Selected: " + filename)
 
-# Create GUI
 root = tk.Tk()
 root.title("Simple Music Player")
 
